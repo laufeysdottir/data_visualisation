@@ -7,7 +7,7 @@ output: rmarkdown::github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Загрузка необходимых библиотек
+# Загрузка необходимых библиотек
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -18,8 +18,9 @@ library(ggpubr)
 #install.packages("wesanderson")
 library(wesanderson)
 ```
-<br>
-#Загрузка дата-сета
+
+# Загрузка дата-сета
+
 <br>
 ```{r}
 insurance_cost <- read.csv('insurance_cost.csv', stringsAsFactors = T)
@@ -29,8 +30,9 @@ head(insurance_cost)
 skim(insurance_cost)
 ```
 <br>
-#Вывод гистограммы всех нумерических переменных.
-<br>
+
+# Вывод гистограммы всех нумерических переменных.
+
 ```{r}
 insurance_cost %>%
   keep(is.numeric) %>% 
@@ -40,8 +42,9 @@ insurance_cost %>%
     geom_histogram(bins = 20) +
     theme_light()
 ```
-<br>
-#График плотности по колонке charges.
+
+# График плотности по колонке charges.
+
 <br>
 ```{r}
 mean <- round(mean(insurance_cost$charges),1)
@@ -67,7 +70,8 @@ ch_density <-insurance_cost %>%
 ch_density
 ```
 <br>
-#Ящик с усами по отношению переменных charges и (1) sex (2) smoker (3)  region.
+
+# Ящик с усами по отношению переменных charges и (1) sex (2) smoker (3)  region.
 ```{r}
 ch_sex <- insurance_cost %>%
   ggplot()+
@@ -90,8 +94,9 @@ ch_region <- insurance_cost %>%
   theme_bw()
 ch_region
 ```
-<br>
-#Объединение "ящиков с усами" и графика плотности
+<br> 
+
+# Объединение "ящиков с усами" и графика плотности
 <br>
 ```{r}
 boxes <- ggarrange(ch_sex, ch_smoker, ch_region, ncol = 3, nrow = 1)
@@ -99,13 +104,15 @@ combined_plots <-ggarrange(ch_density, boxes, ncol = 1, nrow = 2)
 annotate_figure(combined_plots, top = text_grob("Chharges, their density and how they vary depending on sex, region and smoking", size = 13, face = "bold"))
 ```
 <br>
-#Фасет графика из задания 3 по колонке region
+
+# Фасет графика из задания 3 по колонке region
 <br>
 ```{r}
 ch_density + facet_wrap(.~region)
 ```
 <br>
-#Scatter plot отношения переменных age и charges
+
+# Scatter plot отношения переменных age и charges
 <br>
 ```{r}
 scatterplot <- insurance_cost %>%
@@ -118,7 +125,8 @@ scatterplot + theme(axis.text.x = element_text(size = 14))
 
 ```
 <br>
-#Линия тренда для предыдущего графика
+
+# Линия тренда для предыдущего графика
 <br>
 ```{r message=FALSE}
 insurance_cost %>%
@@ -136,7 +144,8 @@ insurance_cost %>%
   theme(axis.text.x = element_text(size = 14)) 
 ```
 <br>
-#Разбивка предыдущего графика по колонке smokers
+
+# Разбивка предыдущего графика по колонке smokers
 <br>
 ```{r}
 insurance_cost %>%
@@ -154,7 +163,8 @@ insurance_cost %>%
   theme(axis.text.x = element_text(size = 14))
 ```
 <br>
-#Вместо переменной age  переменная bmi
+
+# Вместо переменной age  переменная bmi
 <br>
 ```{r}
 insurance_cost %>%
@@ -172,10 +182,11 @@ insurance_cost %>%
   theme(axis.text.x = element_text(size = 14))
 ```
 <br>
-#Вопросы к данным
+
+# Вопросы к данным
 <br>
 
-##Вопрос №1.
+## Вопрос №1.
 
 <br>
 
@@ -202,9 +213,10 @@ insurance_cost %>%
 **Looking at the graphs, we can conclude that the BMI of smokers does not differ significantly by gender, however, the median value in both cases corresponds to preobesity.**
 
 <br>
-##Вопрос №2
+
+## Вопрос №2
 <br>
-Is there any dependance on the charges if a woman has kids
+Is there any dependence on the charges if a woman has kids
 ```{r}
 insurance_cost$has_children <- ifelse(insurance_cost$children == 0, "no","yes")
 insurance_cost$has_children <- factor(insurance_cost$has_children, levels = c('yes' , 'no'))
@@ -231,7 +243,7 @@ insurance_cost %>%
 <br>
 
 
-#Повторение графика
+# Повторение графика
 ```{r message=FALSE}
 
 #names(wes_palettes)

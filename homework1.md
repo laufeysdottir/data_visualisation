@@ -28,7 +28,9 @@ library(ggpubr)
 library(wesanderson)
 ```
 
-<br> \#Загрузка дата-сета <br>
+# Загрузка дата-сета
+
+<br>
 
 ``` r
 insurance_cost <- read.csv('insurance_cost.csv', stringsAsFactors = T)
@@ -78,7 +80,9 @@ Data summary
 | children      |         0 |             1 |     1.09 |     1.21 |    0.00 |    0.00 |    1.00 |     2.00 |     5.00 | ▇▂▂▁▁ |
 | charges       |         0 |             1 | 13270.42 | 12110.01 | 1121.87 | 4740.29 | 9382.03 | 16639.91 | 63770.43 | ▇▂▁▁▁ |
 
-<br> \#Вывод гистограммы всех нумерических переменных. <br>
+<br>
+
+# Вывод гистограммы всех нумерических переменных.
 
 ``` r
 insurance_cost %>%
@@ -90,8 +94,11 @@ insurance_cost %>%
     theme_light()
 ```
 
-![](homework1_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> <br>
-\#График плотности по колонке charges. <br>
+![](homework1_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+# График плотности по колонке charges.
+
+<br>
 
 ``` r
 mean <- round(mean(insurance_cost$charges),1)
@@ -118,8 +125,8 @@ ch_density
 ```
 
 ![](homework1_files/figure-gfm/unnamed-chunk-5-1.png)<!-- --> <br>
-\#Ящик с усами по отношению переменных charges и (1) sex (2) smoker (3)
-region.
+
+# Ящик с усами по отношению переменных charges и (1) sex (2) smoker (3) region.
 
 ``` r
 ch_sex <- insurance_cost %>%
@@ -153,7 +160,10 @@ ch_region
 ```
 
 ![](homework1_files/figure-gfm/unnamed-chunk-6-3.png)<!-- --> <br>
-\#Объединение “ящиков с усами” и графика плотности <br>
+
+# Объединение “ящиков с усами” и графика плотности
+
+<br>
 
 ``` r
 boxes <- ggarrange(ch_sex, ch_smoker, ch_region, ncol = 3, nrow = 1)
@@ -162,14 +172,20 @@ annotate_figure(combined_plots, top = text_grob("Chharges, their density and how
 ```
 
 ![](homework1_files/figure-gfm/unnamed-chunk-7-1.png)<!-- --> <br>
-\#Фасет графика из задания 3 по колонке region <br>
+
+# Фасет графика из задания 3 по колонке region
+
+<br>
 
 ``` r
 ch_density + facet_wrap(.~region)
 ```
 
 ![](homework1_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> <br>
-\#Scatter plot отношения переменных age и charges <br>
+
+# Scatter plot отношения переменных age и charges
+
+<br>
 
 ``` r
 scatterplot <- insurance_cost %>%
@@ -182,7 +198,10 @@ scatterplot + theme(axis.text.x = element_text(size = 14))
 ```
 
 ![](homework1_files/figure-gfm/unnamed-chunk-9-1.png)<!-- --> <br>
-\#Линия тренда для предыдущего графика <br>
+
+# Линия тренда для предыдущего графика
+
+<br>
 
 ``` r
 insurance_cost %>%
@@ -201,7 +220,10 @@ insurance_cost %>%
 ```
 
 ![](homework1_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> <br>
-\#Разбивка предыдущего графика по колонке smokers <br>
+
+# Разбивка предыдущего графика по колонке smokers
+
+<br>
 
 ``` r
 insurance_cost %>%
@@ -222,7 +244,10 @@ insurance_cost %>%
     ## `geom_smooth()` using formula 'y ~ x'
 
 ![](homework1_files/figure-gfm/unnamed-chunk-11-1.png)<!-- --> <br>
-\#Вместо переменной age переменная bmi <br>
+
+# Вместо переменной age переменная bmi
+
+<br>
 
 ``` r
 insurance_cost %>%
@@ -243,9 +268,12 @@ insurance_cost %>%
     ## `geom_smooth()` using formula 'y ~ x'
 
 ![](homework1_files/figure-gfm/unnamed-chunk-12-1.png)<!-- --> <br>
-\#Вопросы к данным <br>
 
-\##Вопрос №1.
+# Вопросы к данным
+
+<br>
+
+## Вопрос №1.
 
 <br>
 
@@ -275,8 +303,11 @@ insurance_cost %>%
 not differ significantly by gender, however, the median value in both
 cases corresponds to preobesity.**
 
-<br> \##Вопрос №2 <br> Is there any dependance on the charges if a woman
-has kids
+<br>
+
+## Вопрос №2
+
+<br> Is there any dependence on the charges if a woman has kids
 
 ``` r
 insurance_cost$has_children <- ifelse(insurance_cost$children == 0, "no","yes")
@@ -307,7 +338,7 @@ there’s a sagnifficant difference whether they have kids or not**
 
 <br>
 
-\#Повторение графика
+# Повторение графика
 
 ``` r
 #names(wes_palettes)
